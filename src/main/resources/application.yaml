@@ -3,7 +3,7 @@ micronaut:
     name: micronaut-crud
 datasources:
   default:
-    url: jdbc:mysql://10.11.12.28:3306/mn_playground
+    url: jdbc:mysql://localhost:3306/mn_playground
     username: root
     password: password
     driver-class-name: com.mysql.cj.jdbc.Driver
