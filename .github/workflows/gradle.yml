@@ -46,3 +46,13 @@ jobs:
 
     - name: Run tests
       run: ./gradlew test
+
+    - name: Get current timestamp
+      id: timestamp
+      run: echo "timestamp=$(date +'%Y-%m-%d-%H-%M-%S')" >> $GITHUB_OUTPUT
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-${{ steps.timestamp.outputs.timestamp }}
+        path: build/libs/*.jar
