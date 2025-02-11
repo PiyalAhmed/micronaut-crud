@@ -1,6 +1,5 @@
 package com.piyal.exceptionhandler;
 
-
 import com.piyal.exception.BookNotFoundException;
 import com.piyal.model.error.CustomError;
 import com.piyal.model.error.ErrorMessage;
@@ -14,12 +13,14 @@ import jakarta.inject.Singleton;
 
 @Produces
 @Singleton
-@Requires(classes = {BookNotFoundException.class, ExceptionHandler.class})
-public class BookNotFoundExceptionHandler implements ExceptionHandler<BookNotFoundException, HttpResponse<ErrorMessage>> {
+@Requires(classes = { BookNotFoundException.class, ExceptionHandler.class })
+public class BookNotFoundExceptionHandler
+        implements ExceptionHandler<BookNotFoundException, HttpResponse<ErrorMessage>> {
 
     @Override
     public HttpResponse<ErrorMessage> handle(HttpRequest request, BookNotFoundException exception) {
         CustomError notFound = new CustomError(HttpStatus.NOT_FOUND.getReason(), HttpStatus.NOT_FOUND.getCode());
+        System.out.println("Test");
         return HttpResponse.notFound(new ErrorMessage(notFound));
     }
 }
