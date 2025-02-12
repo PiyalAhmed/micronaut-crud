@@ -35,9 +35,14 @@ jobs:
         run: ./gradlew clean build
 
       - name: Publish package
-        run: ./gradlew publish
+        run: ./gradlew publish　--stacktrace --info
         env:
           GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+      - name: Debug Token
+        run: echo "Token is set"
+        env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Stop and remove services
