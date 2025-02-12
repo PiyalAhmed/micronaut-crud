@@ -41,6 +41,6 @@ public class BookController {
 
     @Post("/{id}/update")
     Book updateBook(Long id, @Body BookData bookData) {
-        return bookService.update(id, bookData);
+        return bookService.update(id, bookData) ;
     }
 }
