@@ -38,7 +38,7 @@ public class BookController {
     Book saveBook(@Body BookData bookData) {
         return bookService.save(bookData);
     }
-
+    //Commented for test only
     @Post("/{id}/update")
     Book updateBook(Long id, @Body BookData bookData) {
         return bookService.update(id, bookData);
