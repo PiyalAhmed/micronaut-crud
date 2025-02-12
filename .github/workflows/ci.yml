@@ -16,8 +16,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
+#      - name: Set up Docker
+#        uses: docker/setup-buildx-action@v3
 
       - name: Set up Docker compose
         run: sudo apt-get install docker-compose
@@ -43,7 +43,7 @@ jobs:
       - name: Publish package
         run: ./gradlew publish
         env:
-          GITHUB_USERNAME: ${{ GITHUB_USERNAME }}
+          GITHUB_USERNAME: ${{ secrets.USERNAME }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Debug Token
