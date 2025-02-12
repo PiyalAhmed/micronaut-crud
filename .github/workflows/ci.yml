@@ -34,6 +34,12 @@ jobs:
       - name: Build and test
         run: ./gradlew clean build
 
+      - name: Publish package
+        run: ./gradlew publish
+        env:
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
       - name: Stop and remove services
         if: always()
         run: docker-compose down
