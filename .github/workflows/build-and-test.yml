@@ -1,7 +1,7 @@
 name: Build and Test on PR Merge
 
 # trigger: push and merge to main branch
-# test
+# test for new PR and merge
 on:
   pull_request:
     branches:
