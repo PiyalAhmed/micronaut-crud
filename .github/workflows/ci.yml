@@ -34,10 +34,16 @@ jobs:
       - name: Build and test
         run: ./gradlew clean build
 
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: micronaut-crud-jar
+          path: build/libs/*.jar
+
       - name: Publish package
-        run: ./gradlew publish　--stacktrace --info
+        run: ./gradlew publish
         env:
-          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          GITHUB_USERNAME: ${{ GITHUB_USERNAME }}
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Debug Token

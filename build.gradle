@@ -77,10 +77,9 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://github.com/knakatasf/devops-micronaut-crud")
-            credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+            uri("https://maven.pkg.github.com/rohitdalvi18/devops-micronaut-crud")            credentials {
+                username = System.getenv("GITHUB_USERNAME") ?: ""
+                password = System.getenv("GITHUB_TOKEN") ?: ""
             }
         }
     }
