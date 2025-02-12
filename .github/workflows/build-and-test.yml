@@ -4,10 +4,10 @@ name: Build and Test on PR Merge
 on:
   pull_request:
     branches:
-      - main
+      - jdbc
   push:
     branches:
-      - main
+      - jdbc
 
 jobs:
   build-and-test:
