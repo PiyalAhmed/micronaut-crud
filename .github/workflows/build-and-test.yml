@@ -37,6 +37,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
+    - name: Set Environment Variables for Database
+      run: |
+        echo "JDBC_URL=jdbc:mysql://localhost:3306/testdb" >> $GITHUB_ENV
+        echo "JDBC_USERNAME=root" >> $GITHUB_ENV
+        echo "JDBC_PASSWORD=password" >> $GITHUB_ENV
+
     - name: Cache Gradle packages
       uses: actions/cache@v2
       with:
