@@ -1,0 +1,60 @@
+name: Build and Test on PR Merge
+
+# trigger: push and merge to main branch
+# test for new PR and merge
+on:
+  pull_request:
+    branches:
+      - jdbc
+  push:
+    branches:
+      - jdbc
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: testdb
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Set Environment Variables for Database
+      run: |
+        echo "JDBC_URL=jdbc:mysql://localhost:3306/testdb" >> $GITHUB_ENV
+        echo "JDBC_USERNAME=root" >> $GITHUB_ENV
+        echo "JDBC_PASSWORD=password" >> $GITHUB_ENV
+
+    - name: Cache Gradle packages
+      uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Build with Gradle
+      run: ./gradlew build --no-daemon
+
+    - name: Run tests
+      run: ./gradlew test --no-daemon
